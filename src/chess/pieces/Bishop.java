@@ -5,64 +5,61 @@ import boardgame.Position;
 import chess.ChessPiece;
 import chess.Color;
 
-public class Rook  extends ChessPiece {
+public class Bishop extends ChessPiece {
 
-    public Rook(Board board, Color color) {
+    public Bishop(Board board, Color color) {
         super(board, color);
     }
 
     @Override
     public boolean[][] possibleMoves() {
         boolean[][] matrix = new boolean[getBoard().getRows()][getBoard().getColums()];
-
         Position p = new Position(0, 0);
 
-        //Checking above (ahead) moves
-        p.setValues(position.getRow() - 1, position.getColumn());
+        //Checking NW moves
+        p.setValues(position.getRow() - 1, position.getColumn() - 1);
         while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
-            p.setRow(p.getRow() - 1);
+            p.setValues(p.getRow() - 1, p.getColumn() - 1);
         }
         if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
         }
 
-        //Checking left moves
-        p.setValues(position.getRow(), position.getColumn() - 1);
+        //Checking NE moves
+        p.setValues(position.getRow() - 1, position.getColumn() + 1);
         while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
-            p.setColumn(p.getColumn() - 1);
+            p.setValues(p.getRow() - 1, p.getColumn() + 1);
         }
         if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
         }
 
-        //Checking right moves
-        p.setValues(position.getRow(), position.getColumn() + 1);
+        //Checking SE moves
+        p.setValues(position.getRow() + 1, position.getColumn() + 1);
         while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
-            p.setColumn(p.getColumn() + 1);
+            p.setValues(p.getRow() + 1, p.getColumn() + 1);
         }
         if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
         }
 
-        //Checking left moves
-        p.setValues(position.getRow() + 1, position.getColumn());
+        //Checking SW moves
+        p.setValues(position.getRow() + 1, position.getColumn() - 1);
         while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
-            p.setRow(p.getRow() + 1);
+            p.setValues(p.getRow() + 1, p.getColumn() - 1);
         }
         if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
             matrix[p.getRow()][p.getColumn()] = true;
         }
-
         return matrix;
     }
 
     @Override
     public String toString(){
-        return "R";
+        return "B";
     }
-
 }
